@@ -1,0 +1,366 @@
+{
+  "_sobre": "Curadoria manual do dataset. Cada chave em 'overrides' é um id de fonte de sources.json; os campos declarados aqui sobrepõem o que a heurística inferiu, e a fonte passa a ter classificacao='override'. Este arquivo NUNCA é sobrescrito pelo parser. Rode 'python3 tools/build_dataset.py --report' para listar as fontes ainda marcadas como 'indefinido'. Campos aceitos: input, output, tipo_fonte, descricao, observacao.",
+  "overrides": {
+    "registros-de-imoveis-e-propriedades/consulta-iptu-sao-paulo": {
+      "tipo_fonte": "municipal"
+    },
+    "datasets-dados-abertos/dados-prefeitura-de-sao-paulo": {
+      "tipo_fonte": "municipal"
+    },
+    "tracking-de-viagens-de-onibus/sptrans-olho-vivo": {
+      "tipo_fonte": "municipal"
+    },
+    "cameras-online/projeto-city-cameras": {
+      "tipo_fonte": "municipal"
+    },
+    "outras-buscas/consulta-os-processos-licitatorios-da-sptrans": {
+      "tipo_fonte": "municipal"
+    },
+    "outras-buscas/acesso-a-informacao-sptrans": {
+      "tipo_fonte": "municipal"
+    },
+    "apis-publicas-brasileiras/receitaws-api-cnpj": {
+      "input": ["cnpj"],
+      "output": ["api_json", "dados_cadastrais", "situacao_cadastral", "socios", "cnae", "endereco"],
+      "observacao": "Sem autenticação. Rate limit de 3 requisições por minuto."
+    },
+    "apis-publicas-brasileiras/viacep-api-de-consulta-de-cep": {
+      "input": ["cep", "endereco", "municipio", "uf"],
+      "output": ["api_json", "endereco"],
+      "observacao": "Sem autenticação e sem limite oficial. Aceita JSON, XML e JSONP."
+    },
+    "apis-publicas-brasileiras/registro-br-api-rdap": {
+      "input": ["dominio"],
+      "output": ["api_json", "dados_cadastrais"],
+      "observacao": "RDAP para domínios .br."
+    },
+    "outras-buscas/mcti-ministerio-da-ciencia-tecnologia-e-inovacao": {
+      "input": ["nenhum"],
+      "output": ["estatistica", "dataset"],
+      "observacao": "Portal institucional; dados de CT&I ficam em painéis e bases vinculadas ao ministério."
+    },
+    "outras-buscas/embrapii-unidades-de-pesquisa-e-inovacao": {
+      "input": ["nenhum"],
+      "output": ["dados_cadastrais", "endereco"],
+      "observacao": "Lista de unidades credenciadas, com localização e áreas de competência."
+    },
+    "outras-buscas/finep-financiadora-de-estudos-e-projetos": {
+      "input": ["nenhum"],
+      "output": ["contrato_publico", "estatistica"],
+      "observacao": "Editais, chamadas públicas e projetos financiados."
+    },
+    "outras-buscas/suframa-superintendencia-da-zona-franca-de-manaus": {
+      "input": ["nenhum"],
+      "output": ["contrato_publico", "estatistica"],
+      "observacao": "Projetos industriais aprovados e indicadores da Zona Franca de Manaus."
+    },
+    "outras-buscas/sinesp-cidadao-site-a-app": {
+      "input": ["placa", "chassi", "nome"],
+      "output": ["veiculo", "mandado_prisao", "dados_cadastrais"],
+      "observacao": "Exige cadastro gov.br. Consulta veículos, mandados de prisão, desaparecidos e procurados."
+    },
+    "outras-buscas/conhecimento-de-empreendimentos-por-dentro": {
+      "input": ["endereco", "municipio"],
+      "tipo_fonte": "privado",
+      "output": ["imovel", "endereco"],
+      "observacao": "Plataformas de hospedagem e aluguel com fotos internas de imóveis e empreendimentos."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/consulta-restituicao-do-imposto-de-renda": {
+      "input": ["cpf"],
+      "output": ["debito"],
+      "observacao": "Requer CPF e data de nascimento. Retorna banco, agência e data da restituição."
+    },
+    "registros-eleitorais-e-politicos/consultar-zonas-eleitorais-por-uf": {
+      "input": ["uf", "municipio"],
+      "output": ["endereco", "dados_cadastrais"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/susep-consulta-de-corretores": {
+      "input": ["nome", "cnpj"],
+      "output": ["dados_cadastrais", "situacao_cadastral"],
+      "observacao": "Sem cadastro. O campo de documento só aceita CNPJ (pessoa jurídica); corretores pessoa natural são localizados pelo nome."
+    },
+    "transparencia-publica-e-defesa-do-consumidor/tcu-plataforma-de-certidoes": {
+      "input": ["cpf", "cnpj", "nome", "uf", "municipio"],
+      "output": ["certidao", "sancao", "dados_cadastrais", "processo", "dataset"],
+      "observacao": "Sem cadastro. Certidões referem-se aos últimos 20 anos e não incluem decisões sem trânsito em julgado, anuladas ou suspensas. UF e município das listas vêm do domicílio na Receita Federal."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/pgfn-divida-aberta": {
+      "input": ["cpf", "cnpj", "nome", "razao_social"],
+      "output": ["debito", "dados_cadastrais"],
+      "observacao": "Sem cadastro. Lista apenas dívidas em situação irregular; permite exportar resultados."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/tst-certidao-negativa-de-debitos-trabalhistas-cndt": {
+      "input": ["cpf", "cnpj"],
+      "output": ["certidao", "debito"],
+      "observacao": "Sem cadastro. Certidão positiva ou negativa emitida na hora."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/caixa-consulta-regularidade-do-empregador-crf": {
+      "input": ["cnpj", "uf"],
+      "output": ["certidao", "situacao_cadastral"],
+      "observacao": "Sem cadastro. Aceita CNPJ ou CEI."
+    },
+    "transparencia-publica-e-defesa-do-consumidor/sicaf-consulta-de-restricao-para-contratar-com-a-administracao-publica": {
+      "input": ["cnpj", "cpf", "razao_social"],
+      "output": ["sancao"],
+      "observacao": "Sem cadastro, com hCaptcha."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/banco-central-encontre-uma-instituicao": {
+      "input": ["nome", "cnpj", "uf", "municipio"],
+      "output": ["dados_cadastrais", "situacao_cadastral"],
+      "observacao": "Sem cadastro. Aceita apenas os 8 primeiros dígitos do CNPJ."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/cenprot-consulta-de-protestos": {
+      "input": ["cpf", "cnpj"],
+      "output": ["debito"],
+      "observacao": "Consulta gratuita; a certidão é paga."
+    },
+    "registros-ambientais/ibama-certificado-de-regularidade-ctf": {
+      "input": ["cpf", "cnpj"],
+      "output": ["certidao", "situacao_cadastral"]
+    },
+    "transparencia-publica-e-defesa-do-consumidor/mte-cadastro-de-empregadores-que-submeteram-trabalhadores-a-condicoes-analogas-a-escravidao": {
+      "input": ["nenhum"],
+      "output": ["sancao", "dataset"],
+      "observacao": "Lista em PDF, atualizada periodicamente pelo MTE."
+    },
+    "outras-buscas/ipea-mapa-das-organizacoes-da-sociedade-civil": {
+      "input": ["nome", "cnpj"],
+      "output": ["dados_cadastrais", "contrato_publico", "estatistica"]
+    },
+    "apis-publicas-brasileiras/cnj-api-publica-datajud": {
+      "input": ["numero_processo"],
+      "output": ["api_json", "processo", "movimentacao"],
+      "observacao": "Chave pública de acesso publicada na própria wiki."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/cnes-consulta-de-profissionais-de-saude": {
+      "input": ["nome", "cpf", "cns"],
+      "output": ["dados_cadastrais", "vinculo_profissional", "endereco"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/cofen-consulta-de-profissionais-de-enfermagem": {
+      "input": ["nome", "cpf", "registro_profissional"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "vinculo_profissional"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/cfo-busca-de-profissionais-de-odontologia": {
+      "input": ["nome", "registro_profissional", "uf"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "vinculo_profissional"],
+      "observacao": "Possui reCAPTCHA."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/cfmv-busca-por-profissionais-e-empresas-de-medicina-veterinaria": {
+      "input": ["nome", "razao_social", "cnpj", "registro_profissional", "uf"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "vinculo_profissional"],
+      "tipo_fonte": "federal"
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/confef-pesquisa-de-profissionais-de-educacao-fisica-registrados": {
+      "input": ["nome", "razao_social", "registro_profissional"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "vinculo_profissional"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/corretores-e-avaliadores-de-imoveis-cofeci-crecisp": {
+      "input": ["nome", "cpf", "registro_profissional", "municipio", "uf"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "vinculo_profissional"],
+      "observacao": "Ambas as consultas possuem captcha."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/mte-situacao-do-registro-profissional-sirpweb": {
+      "input": ["nome", "cpf", "registro_profissional", "uf"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "vinculo_profissional"],
+      "observacao": "Possui captcha."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/anbima-consulta-de-pessoas-certificadas": {
+      "input": ["cpf"],
+      "output": ["dados_cadastrais", "vinculo_profissional", "situacao_cadastral"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/cvm-consultas-de-participantes-regulados": {
+      "input": ["nome", "razao_social", "cpf", "cnpj"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "vinculo_profissional", "dataset"],
+      "observacao": "O cadastro geral possui captcha; companhias abertas e fundos não."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/cjf-certidao-unificada-da-justica-federal": {
+      "input": ["cpf", "cnpj", "email"],
+      "output": ["certidao"],
+      "observacao": "A certidão é enviada para o e-mail informado."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/receita-federal-certidao-de-regularidade-fiscal": {
+      "input": ["cnpj", "cpf"],
+      "output": ["certidao", "debito"],
+      "observacao": "Pessoa física exige também a data de nascimento."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/portal-da-transparencia-pessoas-expostas-politicamente-pep-e-expulsoes-ceaf": {
+      "input": ["nenhum", "cpf", "nome"],
+      "output": ["dataset", "api_json", "dados_cadastrais", "sancao", "remuneracao"],
+      "observacao": "Downloads sem cadastro; a API exige chave gratuita."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/sit-consulta-de-processos-de-autos-de-infracao-por-empregador": {
+      "input": ["cnpj"],
+      "output": ["auto_infracao", "processo", "movimentacao"],
+      "observacao": "Informar o CNPJ raiz (8 primeiros dígitos)."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/mte-cadastro-nacional-de-entidades-sindicais-cnes": {
+      "input": ["cnpj", "razao_social", "numero_processo"],
+      "output": ["dados_cadastrais", "situacao_cadastral"],
+      "observacao": "Possui captcha."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/anvisa-consulta-de-autorizacao-de-funcionamento-de-empresas": {
+      "input": ["cnpj"],
+      "output": ["dados_cadastrais", "situacao_cadastral", "processo"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/anp-consulta-de-postos-revendedores-de-combustiveis": {
+      "input": ["cnpj", "razao_social", "municipio", "uf"],
+      "output": ["dados_cadastrais", "endereco", "dataset"],
+      "observacao": "A consulta possui captcha; a base de dados abertos não."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/mapa-consulta-de-estabelecimentos-com-sif-sigsif": {
+      "input": ["cnpj", "razao_social"],
+      "output": ["dados_cadastrais", "situacao_cadastral"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/mds-cadastro-nacional-de-entidades-de-assistencia-social-cneas": {
+      "input": ["cnpj", "razao_social", "municipio", "uf"],
+      "output": ["dados_cadastrais", "endereco", "situacao_cadastral"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/transferegov-acesso-livre-a-convenios-e-transferencias": {
+      "input": ["cnpj", "cpf", "razao_social", "municipio", "uf"],
+      "output": ["contrato_publico"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/bndes-consulta-a-operacoes-de-financiamento": {
+      "input": ["cnpj", "razao_social"],
+      "output": ["financiamento", "api_json", "dataset"],
+      "observacao": "Na API o CNPJ deve ser informado formatado (00.000.000/0000-00)."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/salic-lei-rouanet-proponentes-incentivadores-e-fornecedores": {
+      "input": ["nome", "razao_social", "cpf", "cnpj"],
+      "output": ["api_json", "dados_cadastrais", "financiamento"],
+      "observacao": "API sem chave."
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/consulta-junta-comercial-de-pernambuco-jucepe": {
+      "input": ["razao_social", "cnpj", "inscricao_estadual"],
+      "output": ["dados_cadastrais", "situacao_cadastral"]
+    },
+    "busca-de-informacoes-via-cpf-cnpj-crm-cna/consulta-junta-comercial-do-rio-de-janeiro-jucerja": {
+      "input": ["razao_social", "cnpj", "inscricao_estadual"],
+      "output": ["dados_cadastrais", "situacao_cadastral"],
+      "observacao": "Possui reCAPTCHA."
+    },
+    "registros-de-imoveis-e-propriedades/incra-consulta-publica-de-imoveis-rurais-sncr": {
+      "input": ["municipio", "uf"],
+      "output": ["imovel", "area_rural", "dataset"],
+      "observacao": "Possui captcha."
+    },
+    "registros-de-imoveis-e-propriedades/onr-mapa-do-registro-de-imoveis-do-brasil": {
+      "input": ["endereco", "coordenadas", "matricula_imovel", "car", "cns"],
+      "output": ["mapa", "imovel", "cartorio"]
+    },
+    "territorio-meio-ambiente-fiscalizacao/anm-cadastro-mineiro-pesquisa-de-processos-minerarios": {
+      "input": ["nome", "razao_social", "cpf", "cnpj", "numero_processo", "municipio", "coordenadas"],
+      "output": ["processo", "dados_cadastrais", "api_json"],
+      "observacao": "A pesquisa de processos possui captcha; a consulta por coordenada não."
+    },
+    "territorio-meio-ambiente-fiscalizacao/ana-outorgas-de-uso-de-recursos-hidricos-emitidas": {
+      "input": ["nenhum"],
+      "output": ["dataset", "outorga", "dados_cadastrais"],
+      "observacao": "A planilha contém CPF/CNPJ, nome do requerente e coordenadas do ponto outorgado."
+    },
+    "outras-buscas/cnj-justica-aberta-serventias-extrajudiciais": {
+      "input": ["cns", "municipio", "uf"],
+      "output": ["cartorio", "endereco"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-pessoa-em-diarios-oficiais-e-atos-publicos": {
+      "input": ["nome"],
+      "output": ["dork", "diario_oficial"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-pessoa-ou-empresa-em-processos-judiciais": {
+      "input": ["nome", "razao_social"],
+      "output": ["dork", "processo", "partes"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-empresa-cnpj-e-quadro-societario": {
+      "input": ["cnpj", "razao_social", "nome"],
+      "output": ["dork", "socios", "dados_cadastrais"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-licitacoes-contratos-e-convenios": {
+      "input": ["cnpj", "razao_social"],
+      "output": ["dork", "contrato_publico", "licitacao", "sancao"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-endereco-e-imovel": {
+      "input": ["endereco", "municipio"],
+      "output": ["dork", "imovel", "dados_cadastrais"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-telefone-e-mail-e-chave-pix": {
+      "input": ["telefone", "email"],
+      "output": ["dork"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-nome-de-usuario-e-perfis": {
+      "input": ["nome"],
+      "output": ["dork", "perfil_social"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-concursos-editais-e-listas-nominais": {
+      "input": ["nome"],
+      "output": ["dork", "dados_cadastrais"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-mapeamento-de-uma-organizacao": {
+      "input": ["dominio"],
+      "output": ["dork"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-servidor-publico-cargo-e-remuneracao": {
+      "input": ["nome"],
+      "output": ["dork", "remuneracao", "dados_cadastrais"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-politico-candidatura-e-doacoes": {
+      "input": ["nome"],
+      "output": ["dork", "dados_cadastrais"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-registro-profissional-e-carreira": {
+      "input": ["nome"],
+      "output": ["dork", "vinculo_profissional", "curriculo"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-veiculo-e-placa": {
+      "input": ["placa", "chassi"],
+      "output": ["dork", "veiculo"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-imovel-rural-fazenda-e-meio-ambiente": {
+      "input": ["nome", "razao_social", "municipio"],
+      "output": ["dork", "auto_infracao", "area_rural", "licenca_ambiental"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-associacao-ong-e-entidade-religiosa": {
+      "input": ["razao_social"],
+      "output": ["dork", "dados_cadastrais", "contrato_publico"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-loja-virtual-e-vendedor-em-marketplace": {
+      "input": ["razao_social", "dominio"],
+      "output": ["dork", "dados_cadastrais"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-noticias-e-linha-do-tempo": {
+      "input": ["nome", "razao_social"],
+      "output": ["dork"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-exposicao-de-uma-organizacao-em-servicos-de-terceiros": {
+      "input": ["dominio", "razao_social"],
+      "output": ["dork"]
+    },
+    "motores-de-busca-contexto-brasil/bing-buscas-por-alvo": {
+      "input": ["dominio", "nome"],
+      "output": ["dork"]
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-diarios-oficiais-estaduais-por-regiao": {
+      "input": ["nome", "razao_social"],
+      "output": ["dork", "diario_oficial"],
+      "tipo_fonte": "dork"
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-tribunais-de-contas-estaduais": {
+      "input": ["nome", "razao_social"],
+      "output": ["dork", "sancao", "processo"],
+      "tipo_fonte": "dork"
+    },
+    "motores-de-busca-contexto-brasil/google-hacking-registro-civil-proclamas-e-falecimento": {
+      "input": ["nome"],
+      "output": ["dork", "dados_cadastrais"],
+      "tipo_fonte": "dork"
+    },
+    "motores-de-busca-contexto-brasil/yandex-buscas-por-alvo": {
+      "input": ["nome", "dominio"],
+      "output": ["dork"],
+      "tipo_fonte": "dork"
+    },
+    "motores-de-busca-contexto-brasil/duckduckgo-buscas-por-alvo": {
+      "input": ["nome", "dominio", "telefone", "email"],
+      "output": ["dork"],
+      "tipo_fonte": "dork"
+    }
+  }
+}

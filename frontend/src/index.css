@@ -1,0 +1,131 @@
+:root {
+  --bg-root: #07080b;
+  --bg-sidebar: #0a0c10;
+  --bg-panel: #0e1117;
+  --bg-card: #131720;
+  --bg-card-hover: #181d29;
+  --bg-code: #050608;
+  
+  --border-subtle: #1c2230;
+  --border-crimson: #3e1015;
+  --border-red-active: #8b0000;
+  
+  --red-primary: #e50914;
+  --red-hover: #ff2a2a;
+  --red-glow: rgba(229, 9, 20, 0.25);
+  --red-wine: #26070a;
+
+  --accent-cyan: #00e5ff;
+  --accent-green: #00ff66;
+  --accent-amber: #ffaa00;
+
+  --text-main: #e6e8ee;
+  --text-muted: #8890a4;
+  --text-dim: #555d71;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: "Consolas", "Courier New", "Fira Code", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-root);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-root);
+}
+::-webkit-scrollbar-thumb {
+  background: #251015;
+  border-radius: 4px;
+  border: 1px solid var(--border-crimson);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--red-primary);
+}
+
+/* Base Terminal / Badge Elements */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
+}
+
+.badge-confirmed {
+  background: rgba(0, 255, 102, 0.1);
+  color: #00ff66;
+  border: 1px solid rgba(0, 255, 102, 0.4);
+}
+
+.badge-partial {
+  background: rgba(255, 170, 0, 0.1);
+  color: #ffaa00;
+  border: 1px solid rgba(255, 170, 0, 0.4);
+}
+
+.badge-unavailable {
+  background: rgba(255, 68, 68, 0.1);
+  color: #ff4d4d;
+  border: 1px solid rgba(255, 68, 68, 0.4);
+}
+
+.badge-manual {
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 229, 255, 0.4);
+}
+
+.badge-crimson {
+  background: var(--red-wine);
+  color: #ff6666;
+  border: 1px solid var(--red-primary);
+}
+
+/* Button Reset and Core Styles */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+/* Scanline and Cyber aesthetic touches */
+.cyber-glow {
+  box-shadow: 0 0 15px var(--red-glow);
+}
+
+.terminal-box {
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #b3bcd0;
+  padding: 12px;
+  overflow-x: auto;
+}
